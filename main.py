@@ -2,8 +2,10 @@ import discord
 import random
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
-
+prefix = "."
 client = discord.Client()
+# args = message.content.slice(prefix.length).trim().split( / + / g)
+# command = args.shift().toLowerCase()
 
 @client.event
 async def on_ready():
