@@ -15,9 +15,9 @@ async def on_message(message):
         return
 
     if message.content.startswith(".oi"):
-        await message.channel.send("Vai se fuder!")
+        await message.channel.send("Oi")
 
     if message.content.startswith(".r"):
-        await message.channel.send(random.randint(1,10))
+        await message.channel.send(random.randint(1,20))
 
 client.run(TOKEN)
