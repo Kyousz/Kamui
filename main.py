@@ -15,7 +15,7 @@ async def on_message(message):
         return
 
     if message.content.startswith(".oi"):
-        await message.channel.send("Oi")
+        await message.channel.send("Bom dia")
 
     if message.content.startswith(".r"):
         await message.channel.send(random.randint(1,20))
