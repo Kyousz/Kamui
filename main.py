@@ -20,6 +20,6 @@ async def on_message(message):
         await message.channel.send("Bom dia")
 
     if message.content.startswith(".r"):
-        await message.channel.send(random.randint(1,20))
+        await message.channel.send(random.randint(1,10))
 
 client.run(TOKEN)
