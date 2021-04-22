@@ -9,7 +9,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print("Bot Online")
+    print("Bot Onl1ne")
 
 @client.event
 async def on_message(message):
