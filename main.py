@@ -4,7 +4,7 @@ import random
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
 
-client = commands.Bot(command_prefix = ".", case_insensitive=True)
+client = commands.Bot(command_prefix=".", case_insensitive=True)
 
 @client.event
 async def on_ready():
