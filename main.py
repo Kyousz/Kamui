@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+import re
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
 
@@ -9,6 +10,7 @@ client = commands.Bot(command_prefix = ".", case_insensitive = True)
 @client.event
 async def on_ready():
   print("{0.user.name} está online!".format(client))
+  await client.change_presence(activity=discord.Game(name="RPG | .ajuda"))
 
 @client.command()
 async def ajuda(ctx):
@@ -26,7 +28,19 @@ async def ajuda(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
-async def r(ctx, num: str, mod: int=0):
+async def t(ctx, test:str, mod:int=0):
+    x = (test.split("+"))
+    for n in range(0,len(x)):
+        dado, valor = (int(texto) for texto in x[n].split("d"))
+        rolls = [random.randint(1, valor) for i in range(dado)]
+        result = " + ".join([str(r) for r in rolls])
+        simb = "+" if mod > 0 else ""
+    await ctx.send(f"🎲 ***Rolagem de {ctx.author.mention}***"
+                   f"\n**Resultado**: {result} **({simb}{mod})**"
+                   f"\n**Total**: {sum(rolls)+mod}")
+
+@client.command()
+async def r(ctx, num:str, mod:int=0):
   dado, valor = (int(texto) for texto in num.split("d"))
   rolls = [random.randint(1, valor) for i in range(dado)]
   result = " + ".join([str(r) for r in rolls])
