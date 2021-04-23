@@ -1,25 +1,22 @@
 import discord
+from discord.ext import commands
 import random
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
-prefix = "."
-client = discord.Client()
-# args = message.content.slice(prefix.length).trim().split( / + / g)
-# command = args.shift().toLowerCase()
+
+client = commands.Bot(command_prefix = ".", case_insensitive=True)
 
 @client.event
 async def on_ready():
-    print("Bot Onliine")
+  print('O BOT {0.user} está online!' .format(client))
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+@client.command()
+async def ola(ctx):
+  await ctx.send(f'Olá, {ctx.author}')
 
-    if message.content.startswith(".oi"):
-        await message.channel.send("Bom dia")
-
-    if message.content.startswith(".r"):
-        await message.channel.send(random.randint(1,10))
+@client.command()
+async def r(ctx, numero1, numero2):
+  variavel = random.randint(int(numero1),int(numero2))
+  await ctx.send(f'O número que saiu no dado é {variavel}')
 
 client.run(TOKEN)
