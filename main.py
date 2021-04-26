@@ -31,7 +31,7 @@ async def metas(ctx):
                    "\n- Deixar números máximos e mínimos em destaque.")
 
 @client.command()
-async def r(ctx, num:str="", mod:int=0):
+async def r(ctx, num:str, mod:int=0):
     lista = []
     x = (num.split("+"))
     for n in range(0,len(x)):
