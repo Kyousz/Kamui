@@ -56,7 +56,7 @@ async def r(ctx, num:str, mod:int=0):
 async def d(ctx, min, max):
     resultado = random.randint(int(min),int(max))
     await ctx.send(f"🎲 ***Rolagem de Dano: {ctx.author.mention}***"
-                   f"\n**Min/Max**: {min} ~ {max} "
+                   f"\n**Poder de Ataque**: {min} ~ {max} "
                    f"\n**Resultado**: {resultado}")
 
 client.run(TOKEN)
