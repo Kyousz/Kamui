@@ -26,23 +26,31 @@ async def ajuda(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
-async def metas(ctx):
-    await ctx.send("- Fazer rolagens como: 1d20+1d6+2"
-                   "\n- Deixar números máximos e mínimos em destaque.")
-
-@client.command()
 async def r(ctx, num:str, mod:int=0):
-    lista = []
+    soma = []
+    crit = []
     x = (num.split("+"))
     for n in range(0,len(x)):
         dado, valor = (int(a) for a in x[n].split("d"))
         rolagens = [random.randint(1, valor) for i in range(dado)]
-        lista.extend(rolagens)
-        result = " + ".join([str(r) for r in lista])
-    simb = "+" if mod > 0 else ""
+        soma.extend(rolagens)
+        for j in range(0,len(rolagens)):
+            if rolagens [j] == valor:
+                crit.append(f"**{rolagens[j]}**")
+            elif rolagens [j] == 1:
+                crit.append(f"**{rolagens[j]}**")
+            else:
+                crit.append(rolagens[j])
+        result = " + ".join([str(r) for r in crit])
+    if mod > 0:
+        simb = (f"+ {mod}")
+    elif mod < 0:
+        simb = (f"- {mod*(-1)}")
+    else:
+        simb = ""
     await ctx.send(f"🎲 ***Rolagem de {ctx.author.mention}***"
-                   f"\n**Resultado**: {num} ({result}) {simb} {mod}"
-                   f"\n**Total**: {sum(lista)+mod}")
+                   f"\n**Resultado**: {num} ({result}) {simb}"
+                   f"\n**Total**: {sum(soma)+mod}")
 
 @client.command()
 async def d(ctx, min, max):
