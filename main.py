@@ -26,6 +26,13 @@ async def ajuda(ctx):
     await ctx.send(embed=embed)
 
 @client.command()
+async def oi(ctx):
+    if ctx.author.id == 235490465342816256:
+        await ctx.send(f"Oi amiga {ctx.author.mention}!")
+    else:
+        await ctx.send("Você não é minha amiga!")
+
+@client.command()
 async def r(ctx, num:str, mod:int=0):
     soma = []
     crit = []
