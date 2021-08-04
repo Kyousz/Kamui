@@ -23,7 +23,7 @@ async def ajuda(ctx):
                     value="Rolar um ou mais dados com mesma quantidade de lados somando ou diminuindo modificadores.", inline=False)
     embed.add_field(name="**.d [danoMIN] [danoMAX]**",
                     value="Rolar o dano de uma arma ou magia acrescentando apenas o dano mínimo e o máximo.", inline=False)
-    embed.set_footer(text="Versão: 1.2")
+    embed.set_footer(text="Versão: 1.3")
     await ctx.send(embed=embed)
 
 @bot.command()
@@ -51,6 +51,7 @@ async def boa(ctx):
 async def r(ctx, num:str, mod:int=0):
     soma = []
     crit = []
+    result = []
     x = (num.split("+"))
     for n in range(0,len(x)):
         dado, valor = (int(a) for a in x[n].split("d"))
