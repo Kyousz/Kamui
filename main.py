@@ -82,4 +82,8 @@ async def d(ctx, min, max):
                    f"\n**Ataque/Habilidade**: {min} ~ {max} "
                    f"\n**Resultado**: {resultado}")
 
+@bot.command()
+async def join(ctx):
+    await ("a")
+
 bot.run(TOKEN)
