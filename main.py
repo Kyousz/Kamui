@@ -4,14 +4,15 @@ import random
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
 
-client = commands.Bot(command_prefix = ".", case_insensitive = True)
+bot = commands.Bot(command_prefix =".", case_insensitive = True)
+client = discord.Client()
 
-@client.event
+@bot.event
 async def on_ready():
-    print("{0.user.name} está online!".format(client))
-    await client.change_presence(activity=discord.Game(name="RPG | .ajuda"))
+    print("{0.user.name} está online!".format(bot))
+    await bot.change_presence(activity=discord.Game(name="RPG | .ajuda"))
 
-@client.command()
+@bot.command()
 async def ajuda(ctx):
     embed=discord.Embed(
         title="LISTA DE COMANDOS",
@@ -25,14 +26,28 @@ async def ajuda(ctx):
     embed.set_footer(text="Versão: 1.2")
     await ctx.send(embed=embed)
 
-@client.command()
+@bot.command()
 async def oi(ctx):
     if ctx.author.id == 235490465342816256:
-        await ctx.send(f"Oi amiga {ctx.author.mention}!")
+        await ctx.send(f"Oi amiga {ctx.author.mention}! c:")
     else:
-        await ctx.send("Você não é minha amiga!")
+        await ctx.send("Você não é a minha amiga! >:c")
 
-@client.command()
+@bot.command()
+async def bom(ctx):
+    if ctx.author.id == 235490465342816256:
+        await ctx.send(f"Bom dia {ctx.author.mention}! c:")
+    else:
+        await ctx.send("Não é um bom dia sem a minha amiga! >:c")
+
+@bot.command()
+async def boa(ctx):
+    if ctx.author.id == 235490465342816256:
+        await ctx.send(f"Boa noite {ctx.author.mention}! c:")
+    else:
+        await ctx.send("Não é uma boa noite sem a minha amiga! >:c")
+
+@bot.command()
 async def r(ctx, num:str, mod:int=0):
     soma = []
     crit = []
@@ -59,11 +74,11 @@ async def r(ctx, num:str, mod:int=0):
                    f"\n**Resultado**: {num} ({result}) {simb}"
                    f"\n**Total**: {sum(soma)+mod}")
 
-@client.command()
+@bot.command()
 async def d(ctx, min, max):
     resultado = random.randint(int(min),int(max))
-    await ctx.send(f"🎲 ***Rolagem de Dano: {ctx.author.mention}***"
-                   f"\n**Poder de Ataque**: {min} ~ {max} "
+    await ctx.send(f"🎲 ***Rolagem de {ctx.author.mention}***"
+                   f"\n**Ataque/Habilidade**: {min} ~ {max} "
                    f"\n**Resultado**: {resultado}")
 
-client.run(TOKEN)
+bot.run(TOKEN)
