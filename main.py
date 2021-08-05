@@ -4,15 +4,15 @@ import random
 
 TOKEN = "ODM0NTgwMDIyODExMDMzNjIw.YIC9Nw.o8YazsHSZ-uqpgFfS-IEPu_L4LA"
 
-bot = commands.Bot(command_prefix =".", case_insensitive = True)
-client = discord.Client()
+client = commands.Bot(command_prefix =".", case_insensitive = True)
 
-@bot.event
+@client.event
 async def on_ready():
-    print("{0.user.name} está online!".format(bot))
-    await bot.change_presence(activity=discord.Game(name="RPG | .ajuda"))
+    print("{0.user.name} está online!".format(client))
+    await client.change_presence(activity=discord.Game(name="RPG | .ajuda"))
 
-@bot.command()
+#AJUDA
+@client.command()
 async def ajuda(ctx):
     embed=discord.Embed(
         title="LISTA DE COMANDOS",
@@ -25,29 +25,35 @@ async def ajuda(ctx):
                     value="Rolar o dano de uma arma ou magia acrescentando apenas o dano mínimo e o máximo.", inline=False)
     embed.set_footer(text="Versão: 1.3")
     await ctx.send(embed=embed)
+    await ctx.message.delete()
 
-@bot.command()
+#Comandos para o meu amor
+@client.command()
 async def oi(ctx):
     if ctx.author.id == 235490465342816256:
         await ctx.send(f"Oi amiga {ctx.author.mention}! c:")
     else:
         await ctx.send("Você não é a minha amiga! >:c")
+    await ctx.message.delete()
 
-@bot.command()
+@client.command()
 async def bom(ctx):
     if ctx.author.id == 235490465342816256:
         await ctx.send(f"Bom dia {ctx.author.mention}! c:")
     else:
         await ctx.send("Não é um bom dia sem a minha amiga! >:c")
+    await ctx.message.delete()
 
-@bot.command()
+@client.command()
 async def boa(ctx):
     if ctx.author.id == 235490465342816256:
         await ctx.send(f"Boa noite {ctx.author.mention}! c:")
     else:
         await ctx.send("Não é uma boa noite sem a minha amiga! >:c")
+    await ctx.message.delete()
 
-@bot.command()
+#DADOS
+@client.command()
 async def r(ctx, num:str, mod:int=0):
     soma = []
     crit = []
@@ -74,16 +80,34 @@ async def r(ctx, num:str, mod:int=0):
     await ctx.send(f"🎲 ***Rolagem de {ctx.author.mention}***"
                    f"\n**Resultado**: {num} ({result}) {simb}"
                    f"\n**Total**: {sum(soma)+mod}")
+    await ctx.message.delete()
 
-@bot.command()
+@client.command()
 async def d(ctx, min, max):
     resultado = random.randint(int(min),int(max))
     await ctx.send(f"🎲 ***Rolagem de {ctx.author.mention}***"
                    f"\n**Ataque/Habilidade**: {min} ~ {max} "
                    f"\n**Resultado**: {resultado}")
+    await ctx.message.delete()
 
-@bot.command()
+#Entrar e Sair do canal de VOZ
+@client.command()
 async def join(ctx):
-    await ("a")
+    try:
+        channel = ctx.author.voice.channel
+        await channel.connect()
+    except AttributeError:
+        await ctx.send("Você precisa estar conectado a um canal de voz!")
+    await ctx.message.delete()
 
-bot.run(TOKEN)
+@client.command()
+async def leave(ctx):
+    try:
+        await ctx.voice_client.disconnect()
+    except AttributeError:
+        await ctx.send("O bot não está conectado a um canal de voz!")
+    await ctx.message.delete()
+
+#TESTES
+
+client.run(TOKEN)
